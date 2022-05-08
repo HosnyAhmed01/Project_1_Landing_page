@@ -7,4 +7,4 @@
 1. functionality to scroll to sections on click
 1. Button to add and remove section
 1. Hide fixed navigation bar while scroll down
-1. Responsive landing page.
+1. Responsive landing pageز

@@ -73,14 +73,26 @@ for (const section of sections) {
        let li =  document.createElement('li');    // creat an li element 
        let links = document.createElement('a')    // creat an a element 
 
-       links.setAttribute("href" , "#" + id);    // give the a elemen href with the name of section
-
        li.appendChild(links);  // add a element to li   
 
        links.textContent = navName; // giving the li the same name as the section
        ul.appendChild(li);
+       if (links.text == section.dataset.nav) {
+           links.addEventListener('click' , () => {
+                  section.scrollIntoView({behavior : 'smooth'})
+              })   
+       }
 }
-
+// adding active class on click
+let links = document.querySelectorAll('ul li a');
+links.forEach((link) => {
+       link.addEventListener('click',() => {
+             links.forEach((link)=>{
+                    link.classList.remove('active-link');
+             }); 
+               link.classList.add('active-link')
+})
+});
 // scroll to top button
 let ScrollToTop = document.querySelector(".scroll-to-top");
 ScrollToTop.addEventListener("click" , function () {
@@ -152,15 +164,18 @@ removeBtn.addEventListener('click' , function () {
 
 // add active class to the section viewed 
 window.addEventListener('scroll' , function () {
-              sections.forEach(function(ele) {
-                     let denstance = ele.getBoundingClientRect();
+              sections.forEach(function(section) {
+                     let denstance = section.getBoundingClientRect();
                      // i used this to compare when i will add and remove active class
                      // console.log(window.scrollY);
                      // console.log('the top is '+ denstance.top + 'the y is ' + denstance.bottom) ;
-                     if (denstance.y <= 0 && denstance.bottom > 0) {
-                            ele.classList.add('active')
+                     if (denstance.y <= 20 && denstance.bottom > 20) {
+                            section.classList.add('active')
+                            links.forEach((activeLink) =>{
+                                   activeLink.textContent === section.dataset.nav ? activeLink.classList.add('active-link'): activeLink.classList.remove('active-link');    
+                            })
                      }else {
-                            ele.classList.remove('active') 
+                            section.classList.remove('active') 
                      }
 })
 }      
@@ -187,20 +202,6 @@ hideShowButttons.forEach(function (element) {
 });
 })
 
-// collapse of nav-bar 
-let header = document.querySelector('.page__header');
-let beforescroll = window.scrollY; 
-let headerHeight = header.getBoundingClientRect();
-window.onscroll = function () {
-       let currentscroll = window.scrollY; 
-       if (currentscroll > beforescroll ) {
-              header.style.transform = `translateY(0px)`;
-       } else {
-              header.style.transform = `translateY(-${headerHeight.height + 10}px)`;
-       } 
-       beforescroll = currentscroll;
-       // i found this in https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp 
-} 
 
 // this just my name 
 let myName = "Hosny Ahmed";

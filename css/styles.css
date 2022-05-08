@@ -1,4 +1,11 @@
 /*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.12,
+* Autoprefixer: v10.4.4
+* Browsers: last 4 version
+*/
+
+/*
  *
  * CSS written based on SMACSS architecture.
  * To learn more, visit: http://smacss.com/
@@ -10,11 +17,11 @@
 
 
 /* ---- Base Rules ---- */
-* {
-    scroll-behavior: smooth;
-}
+
 body {
     background: rgb(136,203,171);
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(136,203,171,1)), to(rgba(0,13,60,1)));
+    background: -o-linear-gradient(bottom, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
     background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
     margin: 0;
     font-family: 'Merriweather', serif;
@@ -68,47 +75,87 @@ section {
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
+.page__header {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    z-index: 5;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    color: #000;
+}   
+@media only screen and (max-width: 600px) {
+    .page__header {
+       justify-content: space-evenly;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .page__header {
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+    }
+}
 .navbar__menu ul {
     padding-left: 0;
     margin: 0;
     text-align: right;
 }
-/* i changed the display into grid*/
+
 .navbar__menu li {
     display: inline-block;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
     transition: 0.3s;
     cursor: pointer;
 }
-@media only screen and (max-width: 600px) {
-    .navbar__menu li {
+@media only screen and (max-width: 375px) {
+    .page__header .navbar__menu li {
         width: 100%;
         text-align: center;
+    }  .page__header .navbar__menu li a {
+        padding:5px ;
+    } 
+}
+@media only screen and (max-width: 600px) {
+    .navbar__menu li {
+        width: 50%;
+        text-align: center;
+    } .navbar__menu li a {
+        padding: 10px;        
     }
 }
 @media only screen and (min-width: 600px) {
     .navbar__menu li {
-        width: 50%;
+        width: calc(100% / 3);
         text-align: center;
     }
 }
 @media only screen and (min-width: 768px) {
     .navbar__menu li {
-        width: fit-content;
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: 130px;
         text-align: center;
     }
 }
 .navbar__menu li a{
     color: black;
     text-decoration: none;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
     transition: 0.3s;
     display: block;
     padding: 20px;
 }
-@media only screen and (max-width: 600px) {
-    .navbar__menu li a {
-        padding: 10px;        
-    }
-}
+
 .navbar__menu li:hover a  { 
   background-color: #000;
   color: white;
@@ -125,38 +172,16 @@ section {
 .navbar__menu .menu__link:hover {
     background: #333;
     color: #fff;
+    -webkit-transition: ease 0.3s all;
+    -o-transition: ease 0.3s all;
     transition: ease 0.3s all;
 }
-
-/* Header Styles */
-/* Extra small devices (phones, 600px and down)
-@media only screen and (max-width: 600px) {...}
-
- Small devices (portrait tablets and large phones, 600px and up) 
-@media only screen and (min-width: 600px) {...}
-
- Medium devices (landscape tablets, 768px and up) 
-@media only screen and (min-width: 768px) {...}
- Large devices (laptops/desktops, 992px and up) 
-@media only screen and (min-width: 992px) {...}
-
- Extra large devices (large laptops and desktops, 1200px and up) 
-@media only screen and (min-width: 1200px) {...} */
-.page__header {
-    background: #fff;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    z-index: 5;
-    transition: 0.3s;
-}   
-@media only screen and (min-width: 600px) {
-    .page__header {
-        justify-content: center;
-    }
+.navbar__menu li .active-link {
+    background-color: #000;    
+    color: #fff;
 }
+
+
 /* scrool to top styles */
 
 .scroll-to-top {
@@ -177,9 +202,16 @@ section {
 }
 /* Add and Remover btn */
 .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 .primary-btn , .secondery-btn {
@@ -189,10 +221,14 @@ section {
     text-align: center;
     margin-bottom: 30px;
     cursor: pointer;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
     transition: 0.3s;
 }
 @media only screen and (max-width: 600px) {
     .primary-btn , .secondery-btn {
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
         width: fit-content;
         margin-bottom: 15px;
     }
@@ -259,12 +295,16 @@ section:nth-of-type(odd) .landing__container::before {
     height: 20vh;
     border-radius: 50%;
     opacity: 0;
+    -webkit-transition: ease 0.5s all;
+    -o-transition: ease 0.5s all;
     transition: ease 0.5s all;
 }
 
 section:nth-of-type(even) .landing__container::before {
     content: '';
     background: rgb(255,255,255);
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(255,255,255,.1)), to(rgba(255,255,255,.2)));
+    background: -o-linear-gradient(bottom, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
     background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
     position: absolute;
     top: 3em;
@@ -274,12 +314,16 @@ section:nth-of-type(even) .landing__container::before {
     height: 10vh;
     border-radius: 50%;
     opacity: 0;
+    -webkit-transition: ease 0.5s all;
+    -o-transition: ease 0.5s all;
     transition: ease 0.5s all;
 }
 
 section:nth-of-type(3n) .landing__container::after {
     content: '';
     background: rgb(255,255,255);
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(255,255,255,.1)), to(rgba(255,255,255,.2)));
+    background: -o-linear-gradient(bottom, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
     background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
     position: absolute;
     right: 0;
@@ -289,12 +333,16 @@ section:nth-of-type(3n) .landing__container::after {
     height: 10vh;
     border-radius: 50%;
     opacity: 0;
+    -webkit-transition: ease 0.5s all;
+    -o-transition: ease 0.5s all;
     transition: ease 0.5s all;
 }
 
 section:nth-of-type(3n + 1) .landing__container::after {
     content: '';
     background: rgb(255,255,255);
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(255,255,255,.1)), to(rgba(255,255,255,.2)));
+    background: -o-linear-gradient(bottom, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
     background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
     position: absolute;
     right: 20vw;
@@ -304,6 +352,8 @@ section:nth-of-type(3n + 1) .landing__container::after {
     height: 15vh;
     border-radius: 50%;
     opacity: 0;
+    -webkit-transition: ease 0.5s all;
+    -o-transition: ease 0.5s all;
     transition: ease 0.5s all;
 }
 
@@ -324,12 +374,15 @@ section:nth-of-type(3n + 1) .landing__container::after {
 /* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
 section.active {
     background: rgb(0, 0, 0);
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0)));
+    background: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 section.active .landing__container::before {
     opacity: 1;
-    animation: rotate 4s linear 0s infinite forwards;
+    -webkit-animation: rotate 4s linear 0s infinite forwards;
+            animation: rotate 4s linear 0s infinite forwards;
 }
 
 section.active .landing__container::after {
@@ -338,14 +391,38 @@ section.active .landing__container::after {
 }
 
 /* Section Active Styles Keyframe Animations */
-@keyframes rotate {
+@-webkit-keyframes rotate {
 	from {
-		transform: rotate(0deg)
+		-webkit-transform: rotate(0deg)
+		            translate(-1em)
+		            rotate(0deg);
+		        transform: rotate(0deg)
 		           translate(-1em)
 		           rotate(0deg);
 	}
 	to {
-		transform: rotate(360deg)
+		-webkit-transform: rotate(360deg)
+		           translate(-1em) 
+		           rotate(-360deg);
+		        transform: rotate(360deg)
+		           translate(-1em) 
+		           rotate(-360deg);
+	}
+}
+@keyframes rotate {
+	from {
+		-webkit-transform: rotate(0deg)
+		           translate(-1em)
+		           rotate(0deg);
+		        transform: rotate(0deg)
+		           translate(-1em)
+		           rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(360deg)
+		           translate(-1em) 
+		           rotate(-360deg);
+		        transform: rotate(360deg)
 		           translate(-1em) 
 		           rotate(-360deg);
 	}
